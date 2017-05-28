@@ -1,0 +1,160 @@
+①进入贴吧主页后 获得所有的帖子
+List<Tiezi> getAllTiezi();
+帖子ID
+帖子标题
+发帖时间
+浏览数
+回帖数
+
+第一楼回帖：
+	回帖文字
+	回帖图片
+	回帖设备
+	回帖位置
+
+发帖者ID
+发帖者头像
+发帖者名称
+发帖者等级
+--------------------------------------------------------------------------------
+②点击某个帖子后获得该帖子的所有回帖
+List<TieziReply> getTieziRepliesByTieziId(Integer tieziId);
+帖子ID
+帖子标题
+浏览数
+回帖数
+
+回帖：
+	回帖楼层号
+	回帖文字
+	回帖图片
+	回帖时间
+	回帖设备
+	回帖位置
+	回帖者ID
+	回帖者名称
+	回帖者等级
+	回帖者头像
+--------------------------------------------------------------------------------
+③回一个帖子
+addReplyToTiezi(TieziReply tieziReply);
+--------------------------------------------------------------------------------
+④发一个帖子
+addTiezi(Tiezi tiezi);
+--------------------------------------------------------------------------------
+⑤点击某个帖子后该帖子的浏览数加1
+addTieziViewNum(Integer tieziId);
+--------------------------------------------------------------------------------
+⑥根据用户ID获得该用户的所有发帖，返回类型为SimpleTiezi的list
+getAllTieziByUserId(Integer userId)
+--------------------------------------------------------------------------------
+⑦根据用户ID获得该用户的回帖，返回类型为SimpleTieziReplyWithTieziTitleId的list
+getTieziReplyByUserId(Integer userId)
+--------------------------------------------------------------------------------
+⑧根据帖子ID、用户ID删除该贴
+deleteTieziByByTieziId(Integer tieziId)
+--------------------------------------------------------------------------------
+⑨根据帖子ID、楼层ID、用户ID删除该回帖
+deleteTieziReplyByIds(Integer tieziId, Integer floorId, Integer userId);
+--------------------------------------------------------------------------------
+①〇插入操作记录 并根据用户ID更新用户的经验值和等级
+updateUserExp(Integer userId, Integer operateId);
+--------------------------------------------------------------------------------
+①①根据用户ID获得其最近20条操作记录
+getUserOperateRecordByUserId(Integer userid);
+包括：
+	操作名,操作时间,操作IP地址
+--------------------------------------------------------------------------------
+①②根据用户ID获得其详细信息
+getUserDetailByUserId(Integer userid);
+包括：
+	用户ID,名称,邮箱,头像,性别,用户等级,经验,生日,年龄,电话号码,签名,介绍,血型,工作,公司,出生地,居住地
+--------------------------------------------------------------------------------
+①③根据用户ID修改其详细信息
+updateUserDetail(Integer userid, UserDetail userDetail, UserBasic userBasic)
+可能包括：
+	邮箱,头像,性别,生日,电话号码,签名,介绍,血型,工作,公司,出生地,居住地
+--------------------------------------------------------------------------------
+①④@功能
+atSomeone(HttpServletRequest req, HttpServletResponse resp)
+getAt(HttpServletRequest req, HttpServletResponse resp)
+包括：
+	给指定用户写@、查看自己发出的@、查看自己收到的@
+--------------------------------------------------------------------------------
+①⑤查看当前在线用户
+getOnlineUserData(HttpServletRequest req, HttpServletResponse resp)
+================================================================================
+NAME			TYPE		LEN		null	default			WHEN INSERT
+================================================================================
+USER_BASIC
+[USERID]		NUMBER				nn		PK,AUTO+	
+[USERNAME]		NVARCHAR2	20		nn						nn
+[PASSWORD]		NVARCHAR2	32		nn						nn
+[EMAIL]			NVARCHAR2	50		
+[ICON]			NVARCHAR2	50		nn		'default'
+[GENDER]		NVARCHAR2	10		nn		'未定'
+[LEVEL]			NUMBER				nn		1
+[EXP]			NUMBER				nn		0
+--------------------------------------------------------------------------------
+USER_DETAIL
+[USERID]		NUMBER				nn		PK,FK			nn
+[BIRTHDAY]		TIMESTAMP		
+[AGE]			NUMBER		
+[PHONE_NUM]		NUMBER		
+[SIGN]			NVARCHAR2	80
+[INTRO]			NVARCHAR2	300
+[BLOOD_TYPE]	NVARCHAR2	10
+[OCCUPATION]	NVARCHAR2	20
+[COMPANY]		NVARCHAR2	50
+[BIRTH_LAND]	NVARCHAR2	50	
+[LIVE_LAND]		NVARCHAR2	50
+--------------------------------------------------------------------------------
+USER_OPERATE_RECORD
+[USERID]		NUMBER				nn		PK01,FK			nn
+[OPERATE_TIME]	TIMESTAMP			nn		PK02			nn
+[OPERATE_ID]	NUMBER				nn		FK				nn
+[IP_ADDRESS]	NVARCHAR2	64		nn						nn
+--------------------------------------------------------------------------------
+OPERATE
+[OPERATE_ID]	NUMBER				nn		PK				nn
+[OPERATE_NAME]	NVARCHAR2	20		nn						nn
+[EXP]			NUMBER				nn						nn	
+--------------------------------------------------------------------------------
+TIEZI
+[TIEZI_ID]		NUMBER				nn		PK,AUTO+	
+[TITLE]			NVARCHAR2	100		nn						nn
+[POSTER_ID]		NUMBER				nn		FK				nn
+[POST_TIME]		TIMESTAMP			nn						nn
+[VIEW_NUM]		NUMBER				nn		0				
+[LATEST_REPLY_TIME]	TIMESTAMP		
+[MAX_FLOOR_ID]	NUMBER
+--------------------------------------------------------------------------------
+TIEZI_REPLY
+[TIEZI_ID]		NUMBER				nn		PK01,FK			nn
+[FLOOR_ID]		NUMBER				nn		PK02,AUTO+		nn
+[REPLYER_ID]	NUMBER				nn		FK				nn
+[REPLY_TIME]	TIMESTAMP			nn						nn
+[CONTENT_TEXT]	NVARCHAR2	1000	nn						nn
+[CONTENT_IMG]	NVARCHAR2	50
+[REPLY_DEVICE]	NVARCHAR2	50
+[REPLY_LOC]		NVARCHAR2	50
+--------------------------------------------------------------------------------
+MSG_AT
+[SRC_ID]		NUMBER				nn		PK01,FK			nn
+[DEST_ID]		NUMBER				nn		PK02,FK			nn
+[MESSAGE]		NVARCHAR2	100		nn						nn
+[AT_TIME]		TIMESTAMP			nn		PK03			nn
+[ISREAD]		NUMBER				nn		0
+--------------------------------------------------------------------------------
+	// Fields
+
+	// Constructors
+	/** default constructor */
+	
+	/** full constructor */
+
+	
+	// Property accessors
+--------------------------------------------------------------------------------
+mark TODO:
+UserServiceImp 若用户没有填完整生日，则post一个空的birthday对象
