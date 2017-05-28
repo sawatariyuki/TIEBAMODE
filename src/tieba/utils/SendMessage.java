@@ -67,16 +67,17 @@ public class SendMessage {
 		UserState us = SendMessage.map.get(userid);
 		String msg = "";
 		if (us.getIsUserhasloggedin()) {
-			msg = "The account has been logged in elsewhere|";
+			msg = "账号已在别处登录|";
 		} else {
 			if (us.getMsgNum() != 0) {
-				msg += us.getMsgNum();
+				msg += "你有" + us.getMsgNum() + "个新动态";
 			}
 			msg += "|";
 			if (us.getIsAted()) {
-				msg += "new@";
+				msg += "new!";
 			}
 		}
+
 		msg += "|" + SendMessage.map.size();
 
 		// System.out.println("=================================================="+msg);

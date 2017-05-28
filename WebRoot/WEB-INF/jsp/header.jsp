@@ -47,17 +47,24 @@ String basePath = request.getScheme() + "://"
 </head>
 
 
-<header class="am-topbar am-topbar-inverse admin-header">
+<header id="msgsys" class="am-topbar am-topbar-inverse admin-header">
+	
 	<a href="tiezi/getAllTiezi" target="content_tiezi">
-	<div class="am-topbar-brand">
-		<strong>ΓΙΕΖΙ</strong> <small>小型贴吧系统</small>
-	</div>
+		<div class="am-topbar-brand">
+			<strong>ΓΙΕΖΙ</strong> <small>小型贴吧系统</small>
+		</div>
 	</a>
 
 	<a href="user/getOnlineUserData" target="content_tiezi">
-	<div class="am-topbar-brand">
-		<small>Online: </small><small id="userNum"></small>
-	</div>
+		<div class="am-topbar-brand">
+			<small>Online: {{userNum}}</small>
+		</div>
+	</a>
+
+	<a href="tiezi/getAllTiezi" target="content_tiezi" v-if="message!=''">
+		<div class="am-topbar-brand" style="margin-left: 15px; color:#ff9201">
+			<small>{{message}}</small>
+		</div>	
 	</a>
 
 	<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
@@ -68,15 +75,9 @@ String basePath = request.getScheme() + "://"
 				</a>
 			</li>
 			<li>
-				<a href="tiezi/getAllTiezi" target="content_tiezi">
-					<span class="am-icon-envelope-o"></span>
-					<sup id="message" style="font-weight:bold;color:#ff9201"></sup>
-					<!-- <span style="font-weight:bold;color:#ff9201">new@</span> -->
-				</a>
-			</li>
-			<li>
 				<a href="user/getAt?flag=receive" target="content_tiezi">
-					<sup id="atMsg" style="font-weight:bold;color:#ff9201"></sup>
+					<span class="am-icon-envelope-o"></span>
+					<sup style="font-weight:bold;color:#ff9201">{{atMsg}}</sup>
 				</a>
 			</li>
 			<li><a href="user/logout" target="_parent"> 退出登录 </a></li>
@@ -85,25 +86,38 @@ String basePath = request.getScheme() + "://"
 </header>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/amazeui.min.js"></script>
-<script type="text/javascript">  
-	if(typeof(EventSource)!=="undefined"){
-		var source = new EventSource("user/getMessageFrom");
-		source.onmessage=function(event){
-			/***
-			 *	"num|new@|1"	"num||1"	"|new@|1"	"||" 
-			**/
-			var data = event.data.split("|");
+<script src="assets/js/vue.js"></script>
+<script type="text/javascript">
+	var MsssageSys = new Vue({
+		el: "#msgsys",
+		data: {
+			message: "",
+			atMsg: "",
+			userNum: "",
+		},
+		mounted: function() {
+			var vm = this
+			if(typeof(EventSource)!=="undefined"){
+				var source = new EventSource("user/getMessageFrom");
+				source.onmessage = function(event){
+					/***
+					 *	"num|new@|1"	"num||1"	"|new@|1"	"||" 
+					 **/
+					var data = event.data.split("|");
+					vm.message = data[0];
+					vm.atMsg = data[1];
+					vm.userNum = data[2];
+				};
+			}else{
+				vm.message = "***";
+				vm.atMsg = "***";
+				vm.userNum = "***";
+			}
+		}
+	});
 
-			document.getElementById("message").innerHTML = data[0];
-			document.getElementById("atMsg").innerHTML = data[1];
-			document.getElementById("userNum").innerHTML = data[2];
-		};
-	}else{
-		document.getElementById("message").innerHTML = "***";
-		document.getElementById("atMsg").innerHTML = "***";
-		document.getElementById("userNum").innerHTML = "***";
-	} 
+	
 
-  
+
 </script>  
 <html class="no-js">
