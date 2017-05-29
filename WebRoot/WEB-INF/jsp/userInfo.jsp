@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://"
++ request.getServerName() + ":" + request.getServerPort()
++ path + "/";
+
 %>
 
 <!doctype html>
@@ -100,177 +100,194 @@
 						<div class="am-panel-bd">
 							<div class="mybtndiv" v-if="isEditable">
 								<button onclick="window.location.href='user/getUserOperateRecord'" 
-										class="am-btn am-btn-primary">
-									操作记录
-								</button>
-							</div>
-							<div class="mybtndiv">
-								<button onclick="window.location.href='tiezi/getAllTieziByUserId?userId=${userDetail.userid}'" 
-										class="am-btn am-btn-primary">
-									全部发帖
-								</button>
-							</div>
-							<div class="mybtndiv">
-								<button onclick="window.location.href='tiezi/getTieziReplyByUserId?userId=${userDetail.userid}'" 
-										class="am-btn am-btn-primary">
-									全部回帖
-								</button>
-							</div>
-							<div style="clear:both"></div>
+								class="am-btn am-btn-primary">
+								操作记录
+							</button>
 						</div>
+						<div class="mybtndiv">
+							<button onclick="window.location.href='tiezi/getAllTieziByUserId?userId=${userDetail.userid}'" 
+							class="am-btn am-btn-primary">
+							全部发帖
+						</button>
 					</div>
-
+					<div class="mybtndiv">
+						<button onclick="window.location.href='tiezi/getTieziReplyByUserId?userId=${userDetail.userid}'" 
+						class="am-btn am-btn-primary">
+						全部回帖
+					</button>
 				</div>
-
-				<div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4" id="form-group">
-					<form class="am-form am-form-horizontal" action="user/updateUserDetail" method="post">
-						<div class="am-form-group">
-							<label for="username" class="am-u-sm-3 am-form-label">昵称 / Name</label>
-							<div class="am-u-sm-9" v-if="edit" >
-								<input type="text" id="username" placeholder="姓名 / Name" v-model="username" disabled="disabled">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{username}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="sign" class="am-u-sm-3 am-form-label">签名 / Sign</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="text" id="sign" placeholder="输入你的签名 / Sign"  v-model="sign" name="sign">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{sign}}
-							</div>
-						</div>	
-
-						<div class="am-form-group">
-							<label for="phoneNum" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="tel" id="phoneNum" placeholder="输入你的电话 / Phone"  v-model="phoneNum" name="phoneNum">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{phoneNum}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="email" id="email" placeholder="输入你的电子邮件 / Email" v-model="email" name="email">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{email}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="gender" class="am-u-sm-3 am-form-label">性别 / Gender</label>
-							<div class="am-u-sm-9" v-if="edit" id="gender">
-								<div class="am-radio my-radio"><label><input type="radio" v-model="gender" value="男" checked="checked" name="gender"> 男</label></div>
-								<div class="am-radio my-radio"><label><input type="radio" v-model="gender" value="女" checked="checked" name="gender"> 女</label></div>
-								<div class="am-radio my-radio"><label><input type="radio" v-model="gender" value="未定" checked="checked" name="gender"> 未定</label></div>
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{gender}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="age" class="am-u-sm-3 am-form-label">年龄 / Age</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="text" id="age" disabled="disabled"  v-model="age">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{age}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="birthday" class="am-u-sm-3 am-form-label">生日 / Birthday</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="text" id="birthday" placeholder="输入你的生日 / Birthday  (yyyy-mm-dd)"  v-model="birthday" name="birthday">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{birthday}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="bloodType" class="am-u-sm-3 am-form-label">血型 / Blood Type</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="text" id="bloodType" placeholder="输入你的血型 / Blood Type"  v-model="bloodType" name="bloodType">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{bloodType}}
-							</div>
-						</div>
-						
-						<div class="am-form-group">
-							<label for="occupation" class="am-u-sm-3 am-form-label">职业 / Occupation</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="text" id="occupation" placeholder="输入你的职业 / Occupation"  v-model="occupation" name="occupation">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{occupation}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="company" class="am-u-sm-3 am-form-label">公司 / Company</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="text" id="company" placeholder="输入你的公司birthLand / Company"  v-model="company" name="company">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{company}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="birthLand" class="am-u-sm-3 am-form-label">出生地 / Birth Land</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="text" id="birthLand" placeholder="输入你的出生地 / Birth Land"  v-model="birthLand" name="birthLand">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{birthLand}}
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="liveLand" class="am-u-sm-3 am-form-label">居住地 / Live Land</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<input type="text" id="liveLand" placeholder="输入你的居住地 / Live Land"  v-model="liveLand" name="liveLand">
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{liveLand}}
-							</div>
-						</div>
-
-						<div class="am-form-group intro-div">
-							<label for="intro" class="am-u-sm-3 am-form-label">简介 / Introduction</label>
-							<div class="am-u-sm-9" v-if="edit">
-								<textarea rows="4" placeholder="简介 / Introduction" style="resize:none" v-model="intro" name="intro" ></textarea>
-							</div>
-							<div class="am-form-label my-label" v-else>
-								{{intro}}
-							</div>
-						</div>
-
-						<div class="am-form-group" height="100px" v-if="isEditable">
-							<div class="am-u-sm-3 am-u-sm-push-3" v-if="edit">
-								<button type="submit" class="am-btn am-btn-primary" id="save-button">保存修改</button>
-							</div>
-							<div class="am-u-sm-3 am-u-sm-push-3" id="edit-div">
-								<button type="button" class="am-btn am-btn-primary" @click="changeEditStatus">{{editButton}}</button>
-							</div>
-						</div>
-					</form>
-				</div>
+				<div style="clear:both"></div>
 			</div>
 		</div>
 
+		<div class="am-panel" v-if="!${isEditable}">
+			<form method="post" action="user/atSomeone" id="sendAtForm">
+				<textarea rows="4" style="width: 100%;resize: none;" required placeholder="发送私信" onkeydown="sendAt()" name="msg"></textarea>
+				<input hidden="hidden" name="targetUser" value="${userDetail.userid}">
+				<div class="am-panel-bd"  style="padding-right: 0 !important">
+					<div>
+						<button onclick="window.location.href='user/getUserOperateRecord'" 
+						class="am-btn am-btn-primary" style="float: right !important;">
+						@TA
+					</button>
+				</div>
+				<div style="clear:both"></div>
+			</form>
+		</div>
 	</div>
-	<!-- content end -->
+
+
+</div>
+
+<div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4" id="form-group">
+	<form class="am-form am-form-horizontal" action="user/updateUserDetail" method="post">
+		<div class="am-form-group">
+			<label for="username" class="am-u-sm-3 am-form-label">昵称 / Name</label>
+			<div class="am-u-sm-9" v-if="edit" >
+				<input type="text" id="username" placeholder="姓名 / Name" v-model="username" disabled="disabled">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{username}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="sign" class="am-u-sm-3 am-form-label">签名 / Sign</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="text" id="sign" placeholder="输入你的签名 / Sign"  v-model="sign" name="sign">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{sign}}
+			</div>
+		</div>	
+
+		<div class="am-form-group">
+			<label for="phoneNum" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="tel" id="phoneNum" placeholder="输入你的电话 / Phone"  v-model="phoneNum" name="phoneNum">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{phoneNum}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="email" id="email" placeholder="输入你的电子邮件 / Email" v-model="email" name="email">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{email}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="gender" class="am-u-sm-3 am-form-label">性别 / Gender</label>
+			<div class="am-u-sm-9" v-if="edit" id="gender">
+				<div class="am-radio my-radio"><label><input type="radio" v-model="gender" value="男" checked="checked" name="gender"> 男</label></div>
+				<div class="am-radio my-radio"><label><input type="radio" v-model="gender" value="女" checked="checked" name="gender"> 女</label></div>
+				<div class="am-radio my-radio"><label><input type="radio" v-model="gender" value="未定" checked="checked" name="gender"> 未定</label></div>
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{gender}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="age" class="am-u-sm-3 am-form-label">年龄 / Age</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="text" id="age" disabled="disabled"  v-model="age">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{age}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="birthday" class="am-u-sm-3 am-form-label">生日 / Birthday</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="text" id="birthday" placeholder="输入你的生日 / Birthday  (yyyy-mm-dd)"  v-model="birthday" name="birthday">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{birthday}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="bloodType" class="am-u-sm-3 am-form-label">血型 / Blood Type</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="text" id="bloodType" placeholder="输入你的血型 / Blood Type"  v-model="bloodType" name="bloodType">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{bloodType}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="occupation" class="am-u-sm-3 am-form-label">职业 / Occupation</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="text" id="occupation" placeholder="输入你的职业 / Occupation"  v-model="occupation" name="occupation">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{occupation}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="company" class="am-u-sm-3 am-form-label">公司 / Company</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="text" id="company" placeholder="输入你的公司birthLand / Company"  v-model="company" name="company">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{company}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="birthLand" class="am-u-sm-3 am-form-label">出生地 / Birth Land</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="text" id="birthLand" placeholder="输入你的出生地 / Birth Land"  v-model="birthLand" name="birthLand">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{birthLand}}
+			</div>
+		</div>
+
+		<div class="am-form-group">
+			<label for="liveLand" class="am-u-sm-3 am-form-label">居住地 / Live Land</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<input type="text" id="liveLand" placeholder="输入你的居住地 / Live Land"  v-model="liveLand" name="liveLand">
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{liveLand}}
+			</div>
+		</div>
+
+		<div class="am-form-group intro-div">
+			<label for="intro" class="am-u-sm-3 am-form-label">简介 / Introduction</label>
+			<div class="am-u-sm-9" v-if="edit">
+				<textarea rows="4" placeholder="简介 / Introduction" style="resize:none" v-model="intro" name="intro" ></textarea>
+			</div>
+			<div class="am-form-label my-label" v-else>
+				{{intro}}
+			</div>
+		</div>
+
+		<div class="am-form-group" height="100px" v-if="isEditable">
+			<div class="am-u-sm-3 am-u-sm-push-3" v-if="edit">
+				<button type="submit" class="am-btn am-btn-primary" id="save-button">保存修改</button>
+			</div>
+			<div class="am-u-sm-3 am-u-sm-push-3" id="edit-div"> 
+				<button type="button" class="am-btn am-btn-primary" @click="changeEditStatus">{{editButton}}</button>
+			</div>
+		</div>
+	</form>
+</div>
+</div>
+</div>
+
+</div>
+<!-- content end -->
 </div>
 
 
@@ -343,6 +360,19 @@
 			}
 		}
 	})
+
+	function sendAt(){
+		var keynum = window.event ? event.keyCode : event.which;
+		if(keynum==13){
+			if(event.shiftKey==1){
+				$("#sendAtForm").submit();
+				event.returnValue=false;
+			}else{
+				
+			}
+			return false;
+		}
+	}
 </script>
 </body>
 </html>
