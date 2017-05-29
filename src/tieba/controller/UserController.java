@@ -143,7 +143,7 @@ public class UserController extends BaseController{
 	 * 目标：POST中的targetUser
 	 * 内容：POST中的msg
 	 */
-	@RequestMapping(value="/atSomeone", method=RequestMethod.POST)
+	@RequestMapping(value="/atSomeone", method=RequestMethod.GET)
 	public void atSomeone(HttpServletRequest req, HttpServletResponse resp) {
 		String result = userService.insertAtsomeMsg(req, resp);
 		

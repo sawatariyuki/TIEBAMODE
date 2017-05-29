@@ -121,22 +121,18 @@ String basePath = request.getScheme() + "://"
 		</div>
 
 		<div class="am-panel" v-if="!${isEditable}">
-			<form method="post" action="user/atSomeone" id="sendAtForm">
-				<textarea rows="4" style="width: 100%;resize: none;" required placeholder="发送私信" onkeydown="sendAt()" name="msg"></textarea>
-				<input hidden="hidden" name="targetUser" value="${userDetail.userid}">
-				<div class="am-panel-bd"  style="padding-right: 0 !important">
-					<div>
-						<button onclick="window.location.href='user/getUserOperateRecord'" 
-						class="am-btn am-btn-primary" style="float: right !important;">
-						@TA
-					</button>
-				</div>
-				<div style="clear:both"></div>
-			</form>
+			<textarea rows="4" style="width: 100%;resize: none;" required placeholder="发送私信" onkeydown="sendAt()" name="msg" id="msg"></textarea>
+			<input hidden="hidden" name="targetUser" value="${userDetail.userid}">
+			<div class="am-panel-bd"  style="padding-right: 0 !important">
+				<div>
+					<button onclick="sendMessage()" 
+					class="am-btn am-btn-primary" style="float: right !important;">
+					@TA
+				</button>
+			</div>
+			<div style="clear:both"></div>
 		</div>
 	</div>
-
-
 </div>
 
 <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4" id="form-group">
@@ -365,13 +361,30 @@ String basePath = request.getScheme() + "://"
 		var keynum = window.event ? event.keyCode : event.which;
 		if(keynum==13){
 			if(event.shiftKey==1){
-				$("#sendAtForm").submit();
+				sendMessage();
 				event.returnValue=false;
 			}else{
 				
 			}
 			return false;
 		}
+	}
+
+	function sendMessage() {
+		console.log($('#msg').val());
+		console.log(${userDetail.userid});
+		$.get('user/atSomeone',{
+			msg: $('#msg').val(),
+			targetUser: ${userDetail.userid}
+		},function(data,status) {
+			console.log(data);
+			console.log(status);
+			if(status == 'success') {
+				alert("@已发送");
+			}else {
+				alert("@失败");
+			}
+		})
 	}
 </script>
 </body>
