@@ -49,17 +49,17 @@ String basePath = request.getScheme() + "://"
 		.td-div {
 			word-wrap:break-word;
 			word-break:break-all;
-			height: 80px;
+			height: 70px;
 			overflow-y: auto;
 			overflow-x:hidden
 		}
 		.td-div-time {
-			height: 10px;
+			height: 18px;
 			text-align: right;
 		}
 		table
 		{
-			font-size:12px;
+			font-size:14px;
 			color:#000000;
 		}
 	</style>
@@ -69,7 +69,7 @@ String basePath = request.getScheme() + "://"
 	<div id="app">
 		<div class="am-u-sm-12 am-u-md-6">
 			<div class="am-g">
-				<div class="am-u-sm-12">收到的信息：</div>
+				<div class="am-u-sm-12" style="font-weight:bold;font-size:20px">收到的@：</div>
 				<div class="am-u-sm-12">
 					<table class="am-table am-table-striped am-table-hover table-main">
 						<thead>
@@ -82,7 +82,7 @@ String basePath = request.getScheme() + "://"
 						<tbody>
 							<c:forEach items="${receiveAts}" var="message" varStatus="status">
 							<tr>
-								<td style="width: 15%;font-size:20px">
+								<td style="width: 15%;font-size:16px">
 									<a href="user/getUserDetailByUserId?USERID=${message.src_userid}" title="${message.src_sign}">
 										${message.src_username}</td>
 									</a>
@@ -106,7 +106,7 @@ String basePath = request.getScheme() + "://"
 		</div>
 		<div class="am-u-sm-12 am-u-md-6">
 			<div class="am-g">
-				<div class="am-u-sm-12">发出的信息：</div>
+				<div class="am-u-sm-12" style="font-weight:bold;font-size:20px">发出的@：</div>
 				<div class="am-u-sm-12">
 					<table class="am-table am-table-striped am-table-hover table-main">
 						<thead>
@@ -126,7 +126,7 @@ String basePath = request.getScheme() + "://"
 										${message.atTime}
 									</div>
 								</td>
-								<td style="width: 15%;font-size:20px">
+								<td style="width: 15%;font-size:16px">
 									<a href="user/getUserDetailByUserId?USERID=${message.dest_userid}" title="${message.dest_sign}">
 										${message.dest_username}
 									</a>
@@ -145,6 +145,14 @@ String basePath = request.getScheme() + "://"
 <script src="assets/js/amazeui.min.js"></script>
 <script src="assets/js/vue.js"></script>
 <script type="text/javascript">
+	window.onload = function() {
+		$(".td-div-time").each(function(index,element){
+			var timeStr = $(element).text().trim();
+			console.log(timeStr);
+			$(element).text( timeStr.substring(0,19) );
+		});
+	}
+
 	var app = new Vue({
 		el: '#app'
 	})

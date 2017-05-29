@@ -115,9 +115,5 @@ String basePath = request.getScheme() + "://"
 			}
 		}
 	});
-
-	
-
-
 </script>  
 <html class="no-js">

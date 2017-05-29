@@ -184,7 +184,7 @@ String basePath = request.getScheme() + "://"
 <script type="text/javascript">
 	window.onload = function() {
 		$(".tieziTime").each(function(index,element){
-			var timeStr = $(element).text();
+			var timeStr = $(element).text().trim();
 			$(element).text( timeStr.substring(0,19) );
 		});
 	}
@@ -194,6 +194,13 @@ String basePath = request.getScheme() + "://"
 		if(keynum==13){
 			if(event.shiftKey==1){
 				// document.getElementById("textArea").innerHTML = document.getElementById("textArea").innerHTML+"\r\n";
+
+
+				// var str = $(".my-textarea").val();
+				// re = /@\[(.+?)\]/g;
+				// console.log("raw: "+str);
+				// console.log( str.match(re) );
+
 				document.getElementById("postTieziForm").submit();
 				event.returnValue=false;
 			}else{
