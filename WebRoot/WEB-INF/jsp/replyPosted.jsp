@@ -97,7 +97,7 @@ String basePath = request.getScheme() + "://"
 
 	window.onload = function() {
 		$(".tieziTime").each(function(index,element){
-			var timeStr = $(element).text();
+			var timeStr = $(element).text().trim();
 			$(element).text( timeStr.substring(0,19) );
 		});
 	}

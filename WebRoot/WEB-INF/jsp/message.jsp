@@ -145,6 +145,14 @@ String basePath = request.getScheme() + "://"
 <script src="assets/js/amazeui.min.js"></script>
 <script src="assets/js/vue.js"></script>
 <script type="text/javascript">
+	window.onload = function() {
+		$(".td-div-time").each(function(index,element){
+			var timeStr = $(element).text().trim();
+			console.log(timeStr);
+			$(element).text( timeStr.substring(0,19) );
+		});
+	}
+
 	var app = new Vue({
 		el: '#app'
 	})

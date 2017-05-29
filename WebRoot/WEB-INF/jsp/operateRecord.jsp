@@ -73,7 +73,7 @@ String basePath = request.getScheme() + "://"
   <script type="text/javascript">
     window.onload = function() {
       $(".operateTime").each(function(index,element){
-        var timeStr = $(element).text();
+        var timeStr = $(element).text().trim();
         $(element).text( timeStr.substring(0,19) );
       });
     }
