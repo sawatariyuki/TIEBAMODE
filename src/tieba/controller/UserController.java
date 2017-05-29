@@ -184,6 +184,24 @@ public class UserController extends BaseController{
 	}
 	
 	/***
+	 * http://localhost:8080/TIEBAMODE/user/getAllAt
+	 * 查看某个用户的所有@（包括send和receive）
+	 */
+	@RequestMapping(value="/getAllAt", method=RequestMethod.GET)
+	public ModelAndView getAllAt(HttpServletRequest req, HttpServletResponse resp) {
+		ModelAndView mv = new ModelAndView();
+		List<SimpleMsgAt> msgSendAts = null;
+		List<SimpleMsgAt> msgReceiveAts = null;
+		msgSendAts = userService.getMsgAtByUserId(req, resp, true);
+		msgReceiveAts = userService.getMsgAtByUserId(req, resp, false);
+		
+		mv.addObject("receiveAts",msgReceiveAts);
+		mv.addObject("sendAts",msgSendAts);
+		mv.setViewName("");	//TODO
+		return mv;
+	}
+	
+	/***
 	 * http://localhost:8080/TIEBAMODE/user/getOnlineUserData
 	 * 获取当前在线用户的信息（点击左上角的Online:x后请求该方法）
 	 */

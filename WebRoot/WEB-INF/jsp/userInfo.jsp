@@ -285,7 +285,10 @@
 		data: {
 			level: ${userDetail.userLevel},
 			exp: ${userDetail.exp},
-			isEditable: ${isEditable}
+			isEditable: false
+		},
+		mounted: function() {
+			this.isEditable = ${isEditable};
 		},
 		computed: {
 			requiredExp: function() {
@@ -324,7 +327,10 @@
 			liveLand: "${userDetail.liveLand}",
 			intro: "${userDetail.intro}",
 			editButton: "编辑信息",
-			isEditable: ${isEditable}
+			isEditable: false
+		},
+		mounted: function() {
+			this.isEditable = ${isEditable};
 		},
 		methods: {
 			changeEditStatus: function() {
