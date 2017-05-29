@@ -150,12 +150,12 @@ public class UserController extends BaseController{
 		Integer userid = Integer.parseInt(req.getParameter("targetUser"));
 		SendMessage.atSomeone(userid);
 
-		System.out.println(
-					"user: "+req.getSession().getAttribute("USERID") +
-					"-->target: "+userid+
-					"\nmsg: "+req.getParameter("msg")
-					
-				);
+//		System.out.println(
+//					"user: "+req.getSession().getAttribute("USERID") +
+//					"-->target: "+userid+
+//					"\nmsg: "+req.getParameter("msg")
+//					
+//				);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		this.json = gson.toJson(result);
