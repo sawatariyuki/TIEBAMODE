@@ -116,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <form action="user/atSomeone" method="post">
     	@某个用户</br>
-    	被@的用户会有“new@”提示</br>
+    	被@的用户会有“new!”提示</br>
     	http://localhost:8080/TIEBAMODE/user/atSomeone</br>
     	targetUser:<input name="targetUser" value="">
     	msg:<input name="msg" value="">
