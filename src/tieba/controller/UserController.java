@@ -197,7 +197,7 @@ public class UserController extends BaseController{
 		
 		mv.addObject("receiveAts",msgReceiveAts);
 		mv.addObject("sendAts",msgSendAts);
-		mv.setViewName("");	//TODO
+		mv.setViewName("message");
 		return mv;
 	}
 	

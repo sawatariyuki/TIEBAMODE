@@ -65,8 +65,6 @@ String basePath = request.getScheme() + "://"
     </div>
   </div>
 
-  <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
-
   <script src="assets/js/jquery.min.js"></script>
   <!--<![endif]-->
   <script src="assets/js/amazeui.min.js"></script>

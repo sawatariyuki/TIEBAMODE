@@ -1,3 +1,13 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://"
++ request.getServerName() + ":" + request.getServerPort()
++ path + "/";
+
+%>
+
 <!doctype html>
 <html class="no-js">
 <head>
@@ -43,6 +53,10 @@
 			overflow-y: auto;
 			overflow-x:hidden
 		}
+		.td-div-time {
+			height: 10px;
+			text-align: right;
+		}
 		table
 		{
 			font-size:12px;
@@ -66,17 +80,25 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr  v-for="message in messagesReceived">
-								<td style="width: 15%;">{{message.username}}</td>
-								<td style="width: 80%;">
-									<div class="td-div">
-										{{message.content}}--{{message.time}}
-									</div>
-								</td>
-								<td style="width: 5%;line-height: 80px;font-weight:bold;color:#ff9201">
-								<span v-if="message.isRead == 1">new!</span>
-								</td> 
-							</tr>
+							<c:forEach items="${receiveAts}" var="message" varStatus="status">
+							<tr>
+								<td style="width: 15%;font-size:20px">
+									<a href="user/getUserDetailByUserId?USERID=${message.src_userid}" title="${message.src_sign}">
+										${message.src_username}</td>
+									</a>
+									<td style="width: 80%;">
+										<div class="td-div">
+											${message.message}
+										</div>
+										<div class="td-div-time">
+											${message.atTime}
+										</div>
+									</td>
+									<td style="width: 5%;line-height: 80px;font-weight:bold;color:#ff9201">
+										<span v-show="${message.isread} != 1">new!</span>
+									</td> 
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -94,50 +116,39 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="message in messagesSent">	
+							<c:forEach items="${sendAts}" var="message" varStatus="status">
+							<tr>	
 								<td style="width: 85%;">
 									<div class="td-div">
-										{{message.content}}--{{message.time}}
+										${message.message}
+									</div>
+									<div class="td-div-time">
+										${message.atTime}
 									</div>
 								</td>
-								<td style="width: 15%;">{{message.username}}</td>
+								<td style="width: 15%;font-size:20px">
+									<a href="user/getUserDetailByUserId?USERID=${message.dest_userid}" title="${message.dest_sign}">
+										${message.dest_username}
+									</a>
+								</td>
 							</tr>
-						</tbody>
-					</table>
-				</div>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 		</div>
-		</div>
 	</div>
+</div>
+</div>
 
-	<script src="assets/js/jquery.min.js"></script>	
-	<script src="assets/js/amazeui.min.js"></script>
-	<script src="assets/js/vue.js"></script>
-	<script type="text/javascript">
-		var app = new Vue({
-			el: '#app',
-			data: {
-				messagesReceived: [
-				{content:"hello",
-				time:"2017-5-12",
-				username:"patrick",
-				isRead:0
-				},{content:"hello",
-				time:"2017-5-12",
-				username:"patrick",
-				isRead:1
-				}],
-				messagesSent: [
-				{content:"hello",
-				time:"2017-5-12",
-				username:"patrick"
-				},{content:"hello",
-				time:"2017-5-12",
-				username:"patrick"
-				}]
-			},
-		})
-	</script>
+<script src="assets/js/jquery.min.js"></script>	
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/vue.js"></script>
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#app'
+	})
+</script>
 
 </body>
 </html>

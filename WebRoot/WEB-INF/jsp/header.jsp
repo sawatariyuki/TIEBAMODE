@@ -75,7 +75,7 @@ String basePath = request.getScheme() + "://"
 				</a>
 			</li>
 			<li>
-				<a href="user/getAt?flag=receive" target="content_tiezi">
+				<a href="user/getAllAt" target="content_tiezi">
 					<span class="am-icon-envelope-o"></span>
 					<sup style="font-weight:bold;color:#ff9201">{{atMsg}}</sup>
 				</a>
