@@ -44,6 +44,7 @@ String basePath = request.getScheme() + "://"
 
 	<link rel="stylesheet" href="assets/css/amazeui.min.css">
 	<link rel="stylesheet" href="assets/css/app.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css"/>
 </head>
 
 
@@ -55,11 +56,26 @@ String basePath = request.getScheme() + "://"
 		</div>
 	</a>
 
-	<a href="user/getOnlineUserData" target="content_tiezi">
+	<a target="content_tiezi" data-toggle="modal" data-target="#myModal">
 		<div class="am-topbar-brand">
 			<small>Online: {{userNum}}</small>
 		</div>
 	</a>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					...
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<a href="tiezi/getAllTiezi" target="content_tiezi" v-if="message!=''">
 		<div class="am-topbar-brand" style="margin-left: 15px; color:#ff9201">
@@ -87,6 +103,7 @@ String basePath = request.getScheme() + "://"
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/amazeui.min.js"></script>
 <script src="assets/js/vue.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var MsssageSys = new Vue({
 		el: "#msgsys",
@@ -103,17 +120,17 @@ String basePath = request.getScheme() + "://"
 					/***
 					 *	"num|new@|1"	"num||1"	"|new@|1"	"||" 
 					 **/
-					var data = event.data.split("|");
-					vm.message = data[0];
-					vm.atMsg = data[1];
-					vm.userNum = data[2];
-				};
-			}else{
-				vm.message = "***";
-				vm.atMsg = "***";
-				vm.userNum = "***";
+					 var data = event.data.split("|");
+					 vm.message = data[0];
+					 vm.atMsg = data[1];
+					 vm.userNum = data[2];
+					};
+				}else{
+					vm.message = "***";
+					vm.atMsg = "***";
+					vm.userNum = "***";
+				}
 			}
-		}
-	});
-</script>  
-<html class="no-js">
+		});
+	</script>  
+	<html class="no-js">
