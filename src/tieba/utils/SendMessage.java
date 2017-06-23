@@ -1,6 +1,7 @@
 package tieba.utils;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class SendMessage {
 	 * UserState中： msgNum 表示新消息数，0表示没有新消息 isUserhasloggedin 表示用户是否已经登录 isAted
 	 * 表示state_beAted状态
 	 */
-	private static Map<Integer, UserState> map = new HashMap<>();
+	private static Map<Integer, UserState> map = Collections.synchronizedMap(new HashMap());
 
 	private static SendMessage instance;
 
